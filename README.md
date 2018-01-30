@@ -87,6 +87,9 @@ Of course you can extend it, its just a minum reference to create a users and au
 
 ### Boot the project and make a post call
 
+http://localhost:port/auth
+
+
     { 
 	  "username" : "yourUserName",
 	  "password" : "yourPassword"
