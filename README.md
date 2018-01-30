@@ -1,4 +1,7 @@
 # commons-boot-jwt-security
+
+[![Build Status](https://travis-ci.org/gdiazs/commons-boot-jwt-security.svg?branch=master)](https://travis-ci.org/gdiazs/commons-boot-jwt-security)
+
 It's an basic library to quickly enable JWT in a spring boot application. If you get here looking for jwt in spring boot you will notice that this implementation of jwt it's very simple. I hope help some one and of course I'll happy to work on all pull request that you could have. 
 
 This project it's compatible with spring boot security, so you can use annotation for configure access base on the authorities of your user.
