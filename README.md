@@ -35,7 +35,7 @@ This project is compatible with spring boot security, so you can use annotation 
 
 
 ### Application properties file
-You'll need a minimum configuration in your properties, a secret word in my case a hash from sha256 and a expiration token in seconds to the future. If want that you token expires on 1hr just add 3600 seconds.
+You'll need a minimum configuration in your properties, a secret word in my case a hash from sha256 and a expiration value in seconds to the future. If you want that you token expires in 1hr just add 3600 seconds.
 
     #JWT security config
     token.secret= 872e4e50ce9990d8b041330c47c9ddd11bec6b503ae9386a99da8584e9bb12c4
