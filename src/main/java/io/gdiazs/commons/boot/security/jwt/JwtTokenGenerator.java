@@ -1,5 +1,6 @@
 package io.gdiazs.commons.boot.security.jwt;
 
+import java.util.Base64;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -76,7 +77,8 @@ public class JwtTokenGenerator {
 	private Claims getClaimsFromToken(String token) {
 		Claims claims;
 		try {
-			claims = Jwts.parser().setSigningKey(this.secret).parseClaimsJws(token).getBody();
+			final String secret = Base64.getEncoder().encodeToString(this.secret.getBytes());
+			claims = Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
 		} catch (Exception e) {
 			claims = null;
 		}
@@ -116,7 +118,7 @@ public class JwtTokenGenerator {
 	}
 
 	public String generateToken(UserDetails userDetails) {
-		Map<String, Object> claims = new HashMap<String, Object>();
+		Map<String, Object> claims = new HashMap<>();
 		claims.put("sub", userDetails.getUsername());
 		claims.put("audience", AUDIENCE_UNKNOWN);
 		claims.put("created", this.generateCurrentDate());
@@ -125,8 +127,10 @@ public class JwtTokenGenerator {
 	}
 
 	private String generateToken(Map<String, Object> claims) {
+		final String secret = Base64.getEncoder().encodeToString(this.secret.getBytes());
+
 		return Jwts.builder().setClaims(claims).setExpiration(this.generateExpirationDate())
-		    .signWith(SignatureAlgorithm.HS512, this.secret).compact();
+		    .signWith(SignatureAlgorithm.HS512, secret).compact();
 
 	}
 

@@ -1,5 +1,6 @@
 package io.gdiazs.commons.boot.security.authentication;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Calendar;
 
 import javax.servlet.http.HttpServletRequest;
@@ -42,7 +43,7 @@ public class AuthenticationController {
 
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<?> authenticationRequest(@RequestBody AuthenticationRequest authenticationRequest,
-	    Device device) throws AuthenticationException {
+	    Device device) throws AuthenticationException, UnsupportedEncodingException {
 
 		Authentication authentication = this.authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
 		    authenticationRequest.getUsername(), authenticationRequest.getPassword()));
