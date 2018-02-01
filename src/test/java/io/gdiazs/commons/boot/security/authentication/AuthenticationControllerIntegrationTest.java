@@ -129,7 +129,7 @@ public class AuthenticationControllerIntegrationTest extends WebIntegrationTestC
             JsonNode jsonNode = objectMapper.readTree(tokenJsonAsString);
             String jwtToken = jsonNode.get("token").asText();
 
-            mockMvc.perform(get("/pingError").header("X-Auth-Token", jwtToken)).andExpect(status().is(403));
+            mockMvc.perform(get("/pingError").header("X-Auth-Token", jwtToken)).andExpect(status().isForbidden());
 
         });
 
