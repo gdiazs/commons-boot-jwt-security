@@ -63,6 +63,22 @@ public class AuthenticationControllerIntegrationTest extends WebIntegrationTestC
 
     }
 
+    @Test
+    public void testAuthenticationRequest_badCredentials() throws Exception {
+        AuthenticationRequest authentication = new AuthenticationRequest();
+        authentication.setUsername("admin");
+        authentication.setPassword("Test12345");
+
+        String jsonAuthentication = TestUtil.convertObjectToJsonString(authentication);
+
+        ResultActions res = mockMvc.perform(post("/auth")
+                .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE).content(jsonAuthentication));
+
+        res.andExpect(status().isUnauthorized());
+
+
+    }
+
 
     @Test
     public void testAuthenticationRequest_with_rightRole() throws Exception {
