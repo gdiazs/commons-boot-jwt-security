@@ -3,7 +3,7 @@ INSERT INTO users(id_user, user_name, user_email, user_password, user_account_no
 
 INSERT INTO authorities(
 id_authoritie, authority_name, authority_description, authority_enabled, created_at, updated_at)
-VALUES (1, 'ADMIN', 'ADMIN', 1, '2016-06-01', '2016-06-01');
+VALUES (1, 'ROLE_ADMIN', 'ADMIN', 1, '2016-06-01', '2016-06-01');
 
 
 
