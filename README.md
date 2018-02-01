@@ -2,9 +2,9 @@
 
 [![Build Status](https://travis-ci.org/gdiazs/commons-boot-jwt-security.svg?branch=master)](https://travis-ci.org/gdiazs/commons-boot-jwt-security)
 
-It's an basic library to quickly enable JWT in a spring boot application. If you get here looking for jwt in spring boot you will notice that this implementation of jwt it's very simple. I hope help some one and of course I'll happy to work on all pull request that you could have. 
+It's an basic library to quickly enable JWT in a spring boot application. If you get here looking for jwt in spring boot you will notice that this implementation of jwt is very simple. I hope this help someone and of course I'll be happy to work on all your pull request that you could have. 
 
-This project it's compatible with spring boot security, so you can use annotation for configure access base on the authorities of your user.
+This project is compatible with spring boot security, so you can use annotation to configure access base on the authorities of your user.
 
 ### Clone the repo, compile with maven 
 
@@ -15,11 +15,11 @@ This project it's compatible with spring boot security, so you can use annotatio
 ### On your spring boot project import the dependency
 
 	
-    	<dependency>
-			<groupId>io.gdiazs.commons</groupId>
-			<artifactId>commons-boot-jwt-security</artifactId>
-			<version>${commons-boot-jwt-security}</version>
-		</dependency>
+	<dependency>
+		<groupId>io.gdiazs.commons</groupId>
+		<artifactId>commons-boot-jwt-security</artifactId>
+		<version>${commons-boot-jwt-security}</version>
+	</dependency>
 
 		
 ### In Spring Boot Main add this annotation
@@ -35,7 +35,7 @@ This project it's compatible with spring boot security, so you can use annotatio
 
 
 ### Application properties file
-You'll need a minimum configuration in your properties, a secret word in my case a hash from sha256 and a expiration token in seconds to the future. If want that you token expires on 1hr just add 3600 seconds.
+You'll need a minimum configuration in your properties, a secret word in my case a hash from sha256 and a expiration value in seconds to the future. If you want that you token expires in 1hr just add 3600 seconds.
 
     #JWT security config
     token.secret= 872e4e50ce9990d8b041330c47c9ddd11bec6b503ae9386a99da8584e9bb12c4
