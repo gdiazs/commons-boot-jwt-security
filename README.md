@@ -2,6 +2,8 @@
 
 [![Build Status](https://travis-ci.org/gdiazs/commons-boot-jwt-security.svg?branch=master)](https://travis-ci.org/gdiazs/commons-boot-jwt-security)
 
+[![enter image description here](https://sonarcloud.io/api/project_badges/measure?project=io.gdiazs.commons:commons-boot-jwt-security&metric=alert_status)](https://sonarcloud.io/dashboard?id=io.gdiazs.commons%3Acommons-boot-jwt-security)
+
 It's an basic library to quickly enable JWT in a spring boot application. If you get here looking for jwt in spring boot you will notice that this implementation of jwt is very simple. I hope this help someone and of course I'll be happy to work on all your pull request that you could have. 
 
 This project is compatible with spring boot security, so you can use annotation to configure access base on the authorities of your user as you can see in this [class](https://github.com/gdiazs/commons-boot-jwt-security/blob/master/src/test/java/io/gdiazs/commons/boot/security/authentication/PingController.java).
