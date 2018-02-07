@@ -5,3 +5,4 @@ jdk:
 install:
 - mvn -N io.takari:maven:wrapper
 - ./mvnw install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+- ./mvnw sonar:sonar   -Dsonar.organization=gdiazs-github   -Dsonar.host.url=https://sonarcloud.io   -Dsonar.login=727ddb69e056fa3ecbfb89b3e484671306714a36
