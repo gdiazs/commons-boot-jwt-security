@@ -40,5 +40,11 @@ class PingController{
     public ResponseEntity<Ping> getError(){
         return ResponseEntity.ok().body(new Ping());
     }
+    
+    @GetMapping
+    @RequestMapping("/unsecure")
+    public ResponseEntity<Ping> getUnsecure(){
+        return ResponseEntity.ok().body(new Ping());
+    }
 
 }

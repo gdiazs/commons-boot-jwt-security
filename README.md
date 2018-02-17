@@ -35,6 +35,23 @@ This project is compatible with spring boot security, so you can use annotation 
     	}
     }
 
+### Create a SecurityConfig class and extends from CommonsWebSecurityAdapter
+
+	@Configuration
+	@EnableWebSecurity
+	@EnableGlobalMethodSecurity(prePostEnabled = true)
+	public class SecurityConfig extends CommonsWebSecurityAdapter{
+
+		@Override
+		public void configure(WebSecurity web) throws Exception {
+
+			super.configure(web);
+			web.ignoring().antMatchers("/unsecure");
+		}
+
+
+	}
+
 
 ### Application properties file
 You'll need a minimum configuration in your properties, a secret word in my case a hash from sha256 and a expiration value in seconds to the future. If you want that you token expires in 1hr just add 3600 seconds.
@@ -103,8 +120,13 @@ Then you will get
 	  "token": "yourToken"
 	}
 
+
+![Request](https://i.imgur.com/ONiI4Ir.png)
+
 ### On each http request just as a http header
 	X-Auth-Token: yourToken
+	
+	
 
 ## Thanks to
 [spring-security-jwt-rest-stateless](https://github.com/lynas/spring-security-jwt-rest-stateless)
@@ -113,6 +135,6 @@ Then you will get
 
 
 ## License
-commons-boot-jwt-securityis released under version 2.0 of the [Apache License.](http://www.apache.org/licenses/LICENSE-2.0)
+commons-boot-jwt-security is released under version 2.0 of the [Apache License.](http://www.apache.org/licenses/LICENSE-2.0)
 
 

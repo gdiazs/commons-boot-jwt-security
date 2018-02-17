@@ -1,6 +1,5 @@
 package io.gdiazs.commons.boot.security.authentication;
 
-import java.io.UnsupportedEncodingException;
 import java.util.Calendar;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,7 +11,6 @@ import org.springframework.mobile.device.Device;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -24,8 +22,6 @@ import org.springframework.web.bind.annotation.RestController;
 import io.gdiazs.commons.boot.security.jwt.JwtTokenGenerator;
 import io.gdiazs.commons.boot.security.user.UserDTO;
 import io.gdiazs.commons.boot.security.web.CommonsWebSecurityConstants;
-
-
 
 @RestController
 @RequestMapping("/auth")
@@ -42,11 +38,11 @@ public class AuthenticationController {
 	private UserDetailsService userDetailsService;
 
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<?> authenticationRequest(@RequestBody AuthenticationRequest authenticationRequest,
-	    Device device) throws AuthenticationException, UnsupportedEncodingException {
+	public ResponseEntity<AuthenticationResponse> authenticationRequest(
+			@RequestBody AuthenticationRequest authenticationRequest, Device device) {
 
 		Authentication authentication = this.authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-		    authenticationRequest.getUsername(), authenticationRequest.getPassword()));
+				authenticationRequest.getUsername(), authenticationRequest.getPassword()));
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 
 		UserDetails userDetails = this.userDetailsService.loadUserByUsername(authenticationRequest.getUsername());

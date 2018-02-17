@@ -19,7 +19,6 @@ public class CommonsSecurity {
 
 	  @Bean
 	  public JwtTokenGenerator tokenUtils() {
-		  JwtTokenGenerator tokenGenerator = new JwtTokenGenerator(secret, new Long(expiration));
-	    return tokenGenerator;
+		  return new JwtTokenGenerator(secret, new Long(expiration));
 	  }
 }
