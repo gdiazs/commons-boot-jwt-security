@@ -1,26 +1,24 @@
 package io.gdiazs.commons.boot.security.authentication;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import io.gdiazs.commons.boot.security.TestUtil;
-import io.gdiazs.commons.boot.security.WebIntegrationTestConfigAware;
-import io.jsonwebtoken.Jwts;
-import org.junit.Assert;
-import org.junit.Test;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.test.web.servlet.ResultActions;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.Base64;
-
 import static java.lang.System.out;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.util.Base64;
+
+import org.junit.Assert;
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.ResultActions;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import io.gdiazs.commons.boot.security.TestUtil;
+import io.gdiazs.commons.boot.security.WebIntegrationTestConfigAware;
+import io.jsonwebtoken.Jwts;
 
 
 public class AuthenticationControllerIntegrationTest extends WebIntegrationTestConfigAware {
@@ -133,6 +131,12 @@ public class AuthenticationControllerIntegrationTest extends WebIntegrationTestC
 
         });
 
+    }
+    
+    @Test
+    public void testAuthenticationRequest_with_unsecureResource() throws Exception {
+        ResultActions res = mockMvc.perform(get("/unsecure"));
+        res.andExpect(status().isOk());
     }
 
 
