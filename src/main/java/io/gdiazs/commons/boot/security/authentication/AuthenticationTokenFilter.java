@@ -9,7 +9,6 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -27,7 +26,7 @@ import io.gdiazs.commons.boot.security.web.CommonsWebSecurityConstants;
 
 public class AuthenticationTokenFilter extends UsernamePasswordAuthenticationFilter {
 
-	final static Logger logger = Logger.getLogger(AuthenticationTokenFilter.class);
+
 
 	@Autowired
 	private JwtTokenGenerator tokenUtils;
@@ -39,7 +38,7 @@ public class AuthenticationTokenFilter extends UsernamePasswordAuthenticationFil
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
 
-		logger.debug("Filtering headers...");
+
 
 		tokenUtils = WebApplicationContextUtils.getRequiredWebApplicationContext(this.getServletContext())
 				.getBean(JwtTokenGenerator.class);

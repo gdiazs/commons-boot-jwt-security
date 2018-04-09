@@ -27,12 +27,13 @@ public abstract class WebIntegrationTestConfigAware {
 
 	@Autowired
 	private FilterChainProxy springSecurityFilterChain;
+	
+	@Autowired
+	private DeviceResolverRequestFilter deviceResolverRequestFilter;
 
 	@Before
 	public void setup() {
 		mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
-		DeviceResolverRequestFilter deviceResolverRequestFilter = new DeviceResolverRequestFilter();
-
 		mockMvc = MockMvcBuilders.webAppContextSetup(context)
 				.addFilters(this.springSecurityFilterChain, deviceResolverRequestFilter).build();
 	}

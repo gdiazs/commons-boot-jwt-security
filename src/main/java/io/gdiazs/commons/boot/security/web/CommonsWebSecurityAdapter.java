@@ -66,5 +66,7 @@ public abstract class CommonsWebSecurityAdapter extends WebSecurityConfigurerAda
     authenticationTokenFilter.setAuthenticationManager(super.authenticationManagerBean());
     return authenticationTokenFilter;
   }
+  
+  
 
 }
