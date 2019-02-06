@@ -1,11 +1,15 @@
 package io.gdiazs.commons.boot.security.jwt;
 
+import java.util.ArrayList;
 import java.util.Base64;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.mobile.device.Device;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import io.gdiazs.commons.boot.security.user.UserDTO;
@@ -113,24 +117,26 @@ public class JwtTokenGenerator {
 	public String generateToken(UserDetails userDetails, Device device) {
 		Map<String, Object> claims = new HashMap<String, Object>();
 		claims.put("sub", userDetails.getUsername());
-		claims.put("iss", userDetails.getAuthorities());
+		claims.put("iss", getIssClaim());
+		claims.put("aud", getAudience(device));
 		claims.put("audience", getAudience(device));
 		claims.put("created", this.generateCurrentDate());
 		claims.put("authorities", userDetails.getAuthorities());
 		claims.put("upn", userDetails.getUsername());
-		claims.put("groups", userDetails.getAuthorities());
+		claims.put("groups", getGroups(userDetails));
 		return this.generateToken(claims);
 	}
 
 	public String generateToken(UserDetails userDetails) {
 		Map<String, Object> claims = new HashMap<>();
 		claims.put("sub", userDetails.getUsername());
-		claims.put("iss", userDetails.getAuthorities());
+		claims.put("iss", getIssClaim());
+		claims.put("aud", AUDIENCE_UNKNOWN);
 		claims.put("audience", AUDIENCE_UNKNOWN);
 		claims.put("created", this.generateCurrentDate());
 		claims.put("authorities", userDetails.getAuthorities());
 		claims.put("upn", userDetails.getUsername());
-		claims.put("groups", userDetails.getAuthorities());
+		claims.put("groups", getGroups(userDetails));
 		return this.generateToken(claims);
 	}
 
@@ -138,7 +144,7 @@ public class JwtTokenGenerator {
 		final String secret = Base64.getEncoder().encodeToString(this.secret.getBytes());
 
 		return Jwts.builder().setClaims(claims).setExpiration(this.generateExpirationDate())
-		    .signWith(SignatureAlgorithm.HS512, secret).compact();
+		    .signWith(SignatureAlgorithm.HS256, secret).compact();
 
 	}
 
@@ -183,6 +189,14 @@ public class JwtTokenGenerator {
 
 		return this.AUDIENCE_UNKNOWN;
 
+	}
+	
+	
+	private static List<String> getGroups(UserDetails userDetails) {
+		List<String> groups = new ArrayList<>();
+		Collection<? extends GrantedAuthority> authorities = userDetails.getAuthorities();
+		authorities.forEach(auth -> groups.add(auth.getAuthority()));
+		return groups;
 	}
 
 	public String getIssClaim() {
