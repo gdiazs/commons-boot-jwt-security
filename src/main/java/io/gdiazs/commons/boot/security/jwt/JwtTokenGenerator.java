@@ -23,6 +23,8 @@ public class JwtTokenGenerator {
 	private String secret = "default";
 
 	private Long expiration = 604800L;
+	
+	private String issClaim;
 
 	public JwtTokenGenerator(String secret, Long expiration) {
 		super();
@@ -111,18 +113,24 @@ public class JwtTokenGenerator {
 	public String generateToken(UserDetails userDetails, Device device) {
 		Map<String, Object> claims = new HashMap<String, Object>();
 		claims.put("sub", userDetails.getUsername());
+		claims.put("iss", userDetails.getAuthorities());
 		claims.put("audience", getAudience(device));
 		claims.put("created", this.generateCurrentDate());
 		claims.put("authorities", userDetails.getAuthorities());
+		claims.put("upn", userDetails.getUsername());
+		claims.put("groups", userDetails.getAuthorities());
 		return this.generateToken(claims);
 	}
 
 	public String generateToken(UserDetails userDetails) {
 		Map<String, Object> claims = new HashMap<>();
 		claims.put("sub", userDetails.getUsername());
+		claims.put("iss", userDetails.getAuthorities());
 		claims.put("audience", AUDIENCE_UNKNOWN);
 		claims.put("created", this.generateCurrentDate());
 		claims.put("authorities", userDetails.getAuthorities());
+		claims.put("upn", userDetails.getUsername());
+		claims.put("groups", userDetails.getAuthorities());
 		return this.generateToken(claims);
 	}
 
@@ -176,5 +184,15 @@ public class JwtTokenGenerator {
 		return this.AUDIENCE_UNKNOWN;
 
 	}
+
+	public String getIssClaim() {
+		return issClaim;
+	}
+
+	public void setIssClaim(String issClaim) {
+		this.issClaim = issClaim;
+	}
+	
+	
 
 }
