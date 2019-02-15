@@ -14,10 +14,15 @@ public class CommonsSecurity {
 
 	@Value("${token.expiration}")
 	private String expiration;
+	
+	@Value("${jwt.issuer}")
+	private String issuer;
 
 	@Bean
 	public JwtTokenGenerator tokenUtils() {
-		return new JwtTokenGenerator(secret, new Long(expiration));
+		final JwtTokenGenerator jwtTokenGenerator = new JwtTokenGenerator(secret, new Long(expiration));
+		jwtTokenGenerator.setIssClaim(issuer);
+		return jwtTokenGenerator;
 	}
 
 
